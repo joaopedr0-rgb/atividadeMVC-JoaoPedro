@@ -1,5 +1,4 @@
 using atividadeMVC_JoaoPedro.Controllers;
-using System;
 using System.Data;
 
 namespace atividadeMVC_JoaoPedro
@@ -39,8 +38,9 @@ namespace atividadeMVC_JoaoPedro
         private void button1_Click(object sender, EventArgs e)
         {
             string Status = status.Text;
-            string data = dateTime.Value.ToShortDateString(); 
+            string data = dateTime.Value.ToShortDateString();
             string nomeTarefa = Tarefa.Text;
+
 
             if (string.IsNullOrWhiteSpace(nomeTarefa))
             {
@@ -67,9 +67,11 @@ namespace atividadeMVC_JoaoPedro
             }
             tabelaTarefas.Clear();
             var listagem = tarefaController.listarTarefa();
+
             foreach (var item in listagem)
             {
                 tabelaTarefas.Rows.Add(item.nomeTarefa, item.data, item.status);
+
             }
 
             // Limpa campos

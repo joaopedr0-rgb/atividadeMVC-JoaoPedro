@@ -1,12 +1,5 @@
 ﻿using atividadeMVC_JoaoPedro.Controllers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace atividadeMVC_JoaoPedro.view
 {
@@ -45,39 +38,39 @@ namespace atividadeMVC_JoaoPedro.view
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string name = txtName.Text;
-            string Email = txtEmail.Text;
+            string nameFuncionario = txtName.Text;
+            string email = txtEmail.Text;
             int matricula = Convert.ToInt32(txtMatricula.Text);
 
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(nameFuncionario))
             {
                 MessageBox.Show("Informe o nome do funcionario:");
                 return;
             }
-            if (string.IsNullOrEmpty(Email))
+            if (string.IsNullOrEmpty(email))
             {
                 MessageBox.Show("Informe o Email:");
                 return;
             }
-            if (matricula == null)
+            if (string.IsNullOrEmpty(txtMatricula.Text))
             {
-                MessageBox.Show("Informe o Email:");
+                MessageBox.Show("Informe a matrícula:");
                 return;
             }
             try
             {
-                controller_funcionario.cadastrarFuncionario(name, Email, matricula);
-                MessageBox.Show($"Demanda{name}, Emai:{Email}, matricula{matricula} ");
+                controller_funcionario.cadastrarFuncionario(nameFuncionario, email, matricula);
+                MessageBox.Show($"Demanda: {nameFuncionario}, Email: {email}, matrícula: {matricula}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao cadastrar");
             }
-            TabelaFuncionario.Clear();
+            TabelaFuncionario.Rows.Clear();
             var listagem = controller_funcionario.listarFuncionario();
             foreach (var item in listagem)
             {
-                TabelaFuncionario.Rows.Add(item);
+                TabelaFuncionario.Rows.Add(item.nomeFuncionario, item.email, item.matricula);
             }
 
 
